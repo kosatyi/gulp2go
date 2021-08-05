@@ -1,7 +1,7 @@
 {
   "name": "gulp2go",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "author": {
     "name": "Stepan Kosatyi",
     "url": "https://kosatyi.com/"
@@ -10,9 +10,15 @@
     "type": "git",
     "url": "git://github.com/kosatyi/gulp2go.git"
   },
+  "files": [
+    "dist",
+    "src",
+    "*.d.ts"
+  ],
   "scripts": {
-    "build": "",
-    "version": "",
+    "build": "npm i && babel src/index.js --out-file dist/index.js",
+    "start": "npm i && babel --watch src/index.js --out-file dist/index.js",
+    "version": "npm run build",
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
@@ -43,7 +49,6 @@
     "tsify": "^5.0.4",
     "typescript": "^4.3.5",
     "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0",
-    "watchify": "^4.0.0"
+    "vinyl-source-stream": "^2.0.0"
   }
 }
