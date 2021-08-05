@@ -6,10 +6,10 @@
 [![](https://img.shields.io/github/forks/kosatyi/gulp2go)]()
 [![](https://img.shields.io/github/stars/kosatyi/gulp2go)]()
 
-[![](https://img.shields.io/npm/v/gulp2go.svg)]()
-[![](https://img.shields.io/npm/dt/gulp2go.svg)]()
-[![](https://img.shields.io/github/license/kosatyi/gulp2go.svg)]()
-[![](https://img.shields.io/badge/official-website-green.svg)](https://kosatyi.com/gulp2go/)
+[![](https://img.shields.io/npm/v/gulp2go)]()
+[![](https://img.shields.io/npm/dt/gulp2go)]()
+[![](https://img.shields.io/github/license/kosatyi/gulp2go)]()
+[![](https://img.shields.io/badge/official-website-green)](https://kosatyi.com/gulp2go/)
 
 ## Installation
 
