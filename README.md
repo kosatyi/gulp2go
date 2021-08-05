@@ -40,7 +40,7 @@ const {jsBundler,scssBundler,svgBundler} = require('gulp2go');
 
 ## License
 
-[MIT](https://github.com/cloudipsp/ipsp-js-sdk/blob/HEAD/LICENSE)
+[MIT](https://github.com/kosatyi/gulp2go/blob/HEAD/LICENSE)
 
 ## Author
 
