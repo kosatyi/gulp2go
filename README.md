@@ -2,6 +2,10 @@
 
 ## Instalation
 
+[![](https://img.shields.io/github/issues/kosatyi/gulp2go)]()
+[![](https://img.shields.io/github/forks/kosatyi/gulp2go)]()
+[![](https://img.shields.io/github/stars/kosatyi/gulp2go)]()
+
 [![](https://img.shields.io/npm/v/gulp2go.svg)]()
 [![](https://img.shields.io/npm/dt/gulp2go.svg)]()
 [![](https://img.shields.io/github/license/kosatyi/gulp2go.svg)]()
