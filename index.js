@@ -1,39 +1,52 @@
-import gulp from 'gulp';
-import sourcemaps from 'gulp-sourcemaps';
-import through2 from 'through2';
-import del from 'del';
-import uglify from 'gulp-uglify';
-import rename from 'gulp-rename';
-import autoprefixer from 'gulp-autoprefixer';
-import svgSprite from 'gulp-svg-sprite';
-import touch from 'gulp-touch-fd';
-import cleanCSS from 'gulp-clean-css';
-import browserify from 'browserify';
-import vinylSource from 'vinyl-source-stream';
-import vinylBuffer from 'vinyl-buffer';
-import gulpSass from 'gulp-sass';
-import sassEngine from 'sass';
+const gulp = require('gulp');
+const sourcemaps = require('gulp-sourcemaps');
+const through2 = require('through2');
+const del = require('del');
+const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
+const autoprefixer = require('gulp-autoprefixer');
+const svgSprite = require('gulp-svg-sprite');
+const touch = require('gulp-touch-fd');
+const cleanCSS = require('gulp-clean-css');
+const browserify = require('browserify');
+const vinylSource = require('vinyl-source-stream');
+const vinylBuffer = require('vinyl-buffer');
+const tools = require('browserify-transform-tools');
+const sass = require('gulp-sass')(require('sass'));
 
-const sass = gulpSass(sassEngine);
+exports.gulp = gulp;
+exports.del = del;
+exports.through2 = through2;
+exports.sourcemaps = sourcemaps;
+exports.sass = sass;
+exports.browserify = browserify;
+exports.vinylSource = vinylSource;
+exports.vinylBuffer = vinylBuffer;
+exports.svgSprite = svgSprite;
+exports.uglify = uglify;
+exports.rename = rename;
+exports.touch = touch;
 
 const extend = (defaults, options) => Object.assign({}, defaults, options);
 
-export {
-    gulp,
-    del,
-    through2,
-    sourcemaps,
-    sass,
-    browserify,
-    vinylSource,
-    vinylBuffer,
-    svgSprite,
-    uglify,
-    rename,
-    touch
-}
+const wrapper = p => `(typeof window !== "undefined" ? window['${p}'] : typeof global !== "undefined" ? global['${p}'] : null)`;
 
-export const svgBundler = (files, bundle, target) => {
+const schemify = tools.makeRequireTransform('schemify',{
+    evaluateArguments: true,
+    jsFilesOnly: true
+},(args, opts, cb) => {
+    const shimmedModules = opts.config || {};
+    const moduleName = args[0];
+    const shim = shimmedModules[moduleName];
+    if(typeof shim === 'undefined') {
+        return cb();
+    } else {
+        return cb(null, wrapper(shim));
+    }
+});
+
+
+const svgBundler = (files, bundle, target) => {
     return () => gulp.src(files)
         .pipe(svgSprite({
             mode: {stack: {sprite: bundle}}
@@ -45,10 +58,11 @@ export const svgBundler = (files, bundle, target) => {
         .pipe(rename(bundle))
         .pipe(gulp.dest(target))
         .pipe(touch());
-}
+};
 
+exports.svgBundler = svgBundler;
 
-export const scssBundler = (files, target) => {
+const scssBundler = (files, target) => {
     return () => gulp.src(files)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
@@ -59,10 +73,12 @@ export const scssBundler = (files, target) => {
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(target))
         .pipe(touch());
-}
+};
+
+exports.scssBundler = scssBundler;
 
 const babelifyDefaults = {
-    "plugins": [
+    plugins: [
         ["@babel/plugin-transform-typescript", {
             "allExtensions": true,
             "allowDeclareFields": true
@@ -70,13 +86,13 @@ const babelifyDefaults = {
         ["@babel/plugin-proposal-class-properties"],
         ["@babel/plugin-transform-runtime"]
     ],
-    "presets": [
+    presets: [
         ["@babel/preset-env", {}]
     ],
-    "sourceMaps": true
-}
+    sourceMaps: true
+};
 
-export const jsBundler = (source, bundle, target, settings) => {
+const jsBundler = (source, bundle, target, settings) => {
     const plugins = [];
     const transform = [];
     const params = {
@@ -93,7 +109,7 @@ export const jsBundler = (source, bundle, target, settings) => {
         transform.push(['babelify', extend(babelifyDefaults, settings['babelify'])]);
     }
     if ('schemify' in settings) {
-        transform.push(['./src/schemify', settings['schemify']]);
+        transform.push([schemify, settings['schemify']]);
     }
     if ('standalone' in settings) {
         params.standalone = settings.standalone;
@@ -110,10 +126,6 @@ export const jsBundler = (source, bundle, target, settings) => {
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(target))
         .pipe(touch());
+};
 
-}
-
-
-
-
-
+exports.jsBundler = jsBundler;
