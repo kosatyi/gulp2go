@@ -11,10 +11,8 @@
     "url": "git://github.com/kosatyi/gulp2go.git"
   },
   "scripts": {
-    "build": "npm install && ./node_modules/gulp/bin/gulp.js",
-    "prepublishOnly": "npm install && ./node_modules/gulp/bin/gulp.js",
-    "start": "./node_modules/gulp/bin/gulp.js watcher",
-    "version": "npm run build",
+    "build": "",
+    "version": "",
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
