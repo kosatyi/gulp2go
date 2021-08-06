@@ -44,12 +44,17 @@ const schemify = tools.makeRequireTransform('schemify',{
         return cb(null, wrapper(shim));
     }
 });
-
-
+/**
+ *
+ * @param files
+ * @param bundle
+ * @param target
+ * @return {*}
+ */
 const svgBundler = (files, bundle, target) => {
-    return () => gulp.src(files)
+    return gulp.src(files)
         .pipe(svgSprite({
-            mode: {stack: {sprite: bundle}}
+            mode: {stack:{sprite: bundle}}
         }))
         .on('error', function (err) {
             console.log(err);
@@ -61,9 +66,14 @@ const svgBundler = (files, bundle, target) => {
 };
 
 exports.svgBundler = svgBundler;
-
+/**
+ *
+ * @param files
+ * @param target
+ * @return {*}
+ */
 const scssBundler = (files, target) => {
-    return () => gulp.src(files)
+    return gulp.src(files)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer())
@@ -91,7 +101,14 @@ const babelifyDefaults = {
     ],
     sourceMaps: true
 };
-
+/**
+ *
+ * @param source
+ * @param bundle
+ * @param target
+ * @param settings
+ * @return {*}
+ */
 const jsBundler = (source, bundle, target, settings) => {
     const plugins = [];
     const transform = [];
@@ -114,7 +131,7 @@ const jsBundler = (source, bundle, target, settings) => {
     if ('standalone' in settings) {
         params.standalone = settings.standalone;
     }
-    return () => browserify(source, params).bundle()
+    return browserify(source, params).bundle()
         .pipe(vinylSource(bundle))
         .pipe(vinylBuffer())
         .pipe(sourcemaps.init({loadMaps: true}))
