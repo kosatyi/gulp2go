@@ -1,6 +1,6 @@
 # Gulp2Go
 
-## Instalation
+## Installation
 
 [![](https://img.shields.io/github/issues/kosatyi/gulp2go)]()
 [![](https://img.shields.io/github/forks/kosatyi/gulp2go)]()
