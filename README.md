@@ -35,7 +35,33 @@ or add dependency manually:
 ## Quick start
 
 ```javascript
+const gulp = require('gulp');
 const {jsBundler,scssBundler,svgBundler} = require('gulp2go');
+/** bundle with browserify **/
+gulp.task('javascript',()=>{
+    return jsBundler('path/to/build.js','bundlefile.js','path/to/js/dist',{
+        /** optional **/
+        babelify:{
+            extensions:['.tsx','.ts']
+        },
+        /** optional **/
+        schemify:{
+            'jquery':'$'
+        },
+        /** optional **/
+        tsify:{
+            target:'es6'
+        }
+    });
+});
+/** bundle with sass **/
+gulp.task('styles',()=>{
+    return scssBundler('path/to/*.scss','path/to/scss/dist')
+});
+/** make svg icon sprite **/
+gulp.task('sprites',()=>{
+    return scssBundler('path/to/*.ssvg','sprite.svg','path/to/svg/dist');
+});
 ```
 
 ## License
