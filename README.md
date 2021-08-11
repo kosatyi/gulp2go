@@ -2,13 +2,13 @@
 
 ## Installation
 
-[![](https://img.shields.io/github/issues/kosatyi/gulp2go)]()
-[![](https://img.shields.io/github/forks/kosatyi/gulp2go)]()
-[![](https://img.shields.io/github/stars/kosatyi/gulp2go)]()
+[![](https://img.shields.io/github/issues/kosatyi/gulp2go)](https://github.com/kosatyi/gulp2go/issues)
+[![](https://img.shields.io/github/forks/kosatyi/gulp2go)](https://github.com/kosatyi/gulp2go)
+[![](https://img.shields.io/github/stars/kosatyi/gulp2go)](https://github.com/kosatyi/gulp2go)
 
-[![](https://img.shields.io/npm/v/gulp2go)]()
-[![](https://img.shields.io/npm/dt/gulp2go)]()
-[![](https://img.shields.io/github/license/kosatyi/gulp2go)]()
+[![](https://img.shields.io/npm/v/gulp2go)](https://www.npmjs.com/package/gulp2go)
+[![](https://img.shields.io/npm/dt/gulp2go)](https://www.npmjs.com/package/gulp2go)
+[![](https://img.shields.io/github/license/kosatyi/gulp2go)](https://github.com/kosatyi/gulp2go/blob/master/LICENSE)
 [![](https://img.shields.io/badge/official-website-green)](https://kosatyi.com/gulp2go/)
 
 ## Installation

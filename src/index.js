@@ -13,6 +13,7 @@ const vinylSource = require('vinyl-source-stream');
 const vinylBuffer = require('vinyl-buffer');
 const tools = require('browserify-transform-tools');
 const sass = require('gulp-sass')(require('sass'));
+
 /**
  * Gulp instance
  * @type {Gulp}
