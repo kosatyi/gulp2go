@@ -15,11 +15,11 @@
 
 ### Node
 
-If you’re using [NPM](https://npmjs.com/) in your project, you can add `ipsp-js-sdk` dependency to `package.json`
+If you’re using [NPM](https://npmjs.com/) in your project, you can add `gulp2go` dependency to `package.json`
 with following command:
 
 ```cmd
-npm i --save gulp2go
+npm i --save-dev gulp2go
 ```
 
 or add dependency manually:
