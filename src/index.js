@@ -74,15 +74,16 @@ exports.svgBundler = svgBundler;
  *
  * @param files
  * @param target
+ * @param settings
  * @return {*}
  */
-const scssBundler = (files, target) => {
+const scssBundler = (files, target, settings) => {
     return gulp.src(files)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
-        .pipe(autoprefixer())
+        .pipe(autoprefixer(settings['autoprefixer'] || {}))
         .pipe(gulp.dest(target))
-        .pipe(cleanCSS())
+        .pipe(cleanCSS(settings['clean'] || {}))
         .pipe(rename({extname: '.min.css'}))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(target))
