@@ -77,7 +77,7 @@ exports.svgBundler = svgBundler;
  * @param settings
  * @return {*}
  */
-const scssBundler = (files, target, settings) => {
+const scssBundler = (files, target, settings = {}) => {
     return gulp.src(files)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
