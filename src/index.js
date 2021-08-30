@@ -114,7 +114,7 @@ const babelifyDefaults = {
  * @param settings
  * @return {*}
  */
-const jsBundler = (source, bundle, target, settings) => {
+const jsBundler = (source, bundle, target, settings = {}) => {
     const plugins = [];
     const transform = [];
     const params = {
