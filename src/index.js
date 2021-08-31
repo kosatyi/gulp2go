@@ -82,7 +82,7 @@ const scssBundler = (files, target, settings = {}) => {
     return gulp.src(files)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
-        .pipe(purify(settings['purify'] || {}))
+        .pipe(purify(settings['purify'] || []))
         .pipe(autoprefixer(settings['autoprefixer'] || {}))
         .pipe(gulp.dest(target))
         .pipe(cleanCSS(settings['clean'] || {}))
