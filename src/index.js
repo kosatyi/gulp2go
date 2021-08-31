@@ -11,9 +11,9 @@ const cleanCSS = require('gulp-clean-css');
 const browserify = require('browserify');
 const vinylSource = require('vinyl-source-stream');
 const vinylBuffer = require('vinyl-buffer');
+const purify = require('gulp-purify-css');
 const tools = require('browserify-transform-tools');
 const sass = require('gulp-sass')(require('sass'));
-
 /**
  * Gulp instance
  * @type {Gulp}
@@ -30,6 +30,7 @@ exports.svgSprite = svgSprite;
 exports.uglify = uglify;
 exports.rename = rename;
 exports.touch = touch;
+exports.purify = purify;
 
 const extend = (defaults, options) => Object.assign({}, defaults, options);
 
@@ -81,6 +82,7 @@ const scssBundler = (files, target, settings = {}) => {
     return gulp.src(files)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
+        .pipe(purify(settings['purify'] || {}))
         .pipe(autoprefixer(settings['autoprefixer'] || {}))
         .pipe(gulp.dest(target))
         .pipe(cleanCSS(settings['clean'] || {}))
