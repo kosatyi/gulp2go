@@ -80,10 +80,10 @@ exports.svgBundler = svgBundler;
  */
 const scssBundler = (files, target, settings = {}) => {
     let chain = gulp.src(files);
-    chain.pipe(sourcemaps.init());
-    chain.pipe(sass().on('error', sass.logError));
+    chain = chain.pipe(sourcemaps.init());
+    chain = chain.pipe(sass().on('error', sass.logError));
     if('purify' in settings){
-        chain.pipe(purify(settings['purify']));
+        chain = chain.pipe(purify(settings['purify']));
     }
     return chain.pipe(autoprefixer(settings['autoprefixer'] || {}))
         .pipe(gulp.dest(target))
