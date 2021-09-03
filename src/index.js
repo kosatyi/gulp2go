@@ -12,6 +12,7 @@ const browserify = require('browserify');
 const vinylSource = require('vinyl-source-stream');
 const vinylBuffer = require('vinyl-buffer');
 const purify = require('gulp-purify-css');
+const concat = require('gulp-concat');
 const tools = require('browserify-transform-tools');
 const sass = require('gulp-sass')(require('sass'));
 /**
@@ -31,6 +32,7 @@ exports.uglify = uglify;
 exports.rename = rename;
 exports.touch = touch;
 exports.purify = purify;
+exports.concat = concat;
 
 const extend = (defaults, options) => Object.assign({}, defaults, options);
 
