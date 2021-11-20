@@ -34,7 +34,7 @@ exports.touch = touch;
 exports.purify = purify;
 exports.concat = concat;
 
-const extend = (defaults, options) => Object.assign({}, defaults, options);
+const extend = (...sources) => Object.assign({}, ...sources);
 
 const wrapper = p => `(typeof window !== "undefined" ? window['${p}'] : typeof global !== "undefined" ? global['${p}'] : null)`;
 
