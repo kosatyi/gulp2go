@@ -9,8 +9,6 @@
 [![](https://img.shields.io/github/license/kosatyi/gulp2go)](https://github.com/kosatyi/gulp2go/blob/master/LICENSE)
 [![](https://img.shields.io/badge/official-website-green)](https://kosatyi.com/gulp2go/)
 
-![nodei.co](https://nodei.co/npm/gulp2go.png?downloads=true&downloadRank=true&stars=true)
-
 > Gulp bundlers for *.js *.scss and *.svg files.
 
 ## Installation
