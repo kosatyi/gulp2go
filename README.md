@@ -62,7 +62,7 @@ gulp.task('styles',()=>{
 });
 /** make svg icon sprite **/
 gulp.task('sprites',()=>{
-    return scssBundler('path/to/*.ssvg','sprite.svg','path/to/svg/dist');
+    return scssBundler('path/to/*.svg','sprite.svg','path/to/svg/dist');
 });
 ```
 
