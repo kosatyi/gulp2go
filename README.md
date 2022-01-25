@@ -1,6 +1,6 @@
 # Gulp2Go
 
-## Installation
+> Gulp bundlers for *.js *.scss and *.svg files.
 
 [![](https://img.shields.io/github/issues/kosatyi/gulp2go)](https://github.com/kosatyi/gulp2go/issues)
 [![](https://img.shields.io/github/forks/kosatyi/gulp2go)](https://github.com/kosatyi/gulp2go)
