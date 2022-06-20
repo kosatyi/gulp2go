@@ -15,24 +15,6 @@ const purify = require('gulp-purify-css');
 const concat = require('gulp-concat');
 const tools = require('browserify-transform-tools');
 const sass = require('gulp-sass')(require('sass'));
-/**
- * Gulp instance
- * @type {Gulp}
- */
-exports.gulp = gulp;
-exports.del = del;
-exports.through2 = through2;
-exports.sourcemaps = sourcemaps;
-exports.sass = sass;
-exports.browserify = browserify;
-exports.vinylSource = vinylSource;
-exports.vinylBuffer = vinylBuffer;
-exports.svgSprite = svgSprite;
-exports.uglify = uglify;
-exports.rename = rename;
-exports.touch = touch;
-exports.purify = purify;
-exports.concat = concat;
 
 const extend = (...sources) => Object.assign({}, ...sources);
 
@@ -72,7 +54,7 @@ const svgBundler = (files, bundle, target) => {
         .pipe(touch());
 };
 
-exports.svgBundler = svgBundler;
+
 /**
  *
  * @param files
@@ -82,7 +64,7 @@ exports.svgBundler = svgBundler;
  */
 const scssBundler = (files, target, settings = {}) => {
     let chain = gulp.src(files);
-    chain = chain.pipe(sourcemaps.init());
+    chain = chain.pipe(sourcemaps.init({}));
     chain = chain.pipe(sass().on('error', sass.logError));
     if('purify' in settings){
         chain = chain.pipe(purify(settings['purify']));
@@ -91,7 +73,7 @@ const scssBundler = (files, target, settings = {}) => {
         .pipe(gulp.dest(target))
         .pipe(cleanCSS(settings['clean'] || {}))
         .pipe(rename({extname: '.min.css'}))
-        .pipe(sourcemaps.write('./'))
+        .pipe(sourcemaps.write('./',{}))
         .pipe(gulp.dest(target))
         .pipe(touch());
 };
@@ -151,9 +133,26 @@ const jsBundler = (source, bundle, target, settings = {}) => {
         .pipe(rename({
             extname: '.min.js'
         }))
-        .pipe(sourcemaps.write('./'))
+        .pipe(sourcemaps.write('./',{}))
         .pipe(gulp.dest(target))
         .pipe(touch());
 };
 
+exports.gulp = gulp;
+exports.through2 = through2;
+exports.sourcemaps = sourcemaps;
+exports.sass = sass;
+exports.del = del;
+exports.browserify = browserify;
+exports.vinylSource = vinylSource;
+exports.vinylBuffer = vinylBuffer;
+exports.svgSprite = svgSprite;
+exports.uglify = uglify;
+exports.rename = rename;
+exports.touch = touch;
+exports.purify = purify;
+exports.concat = concat;
+
 exports.jsBundler = jsBundler;
+exports.scssBundler = scssBundler;
+exports.svgBundler = svgBundler;
