@@ -19,7 +19,7 @@ If you’re using [NPM](https://npmjs.com/) in your project, you can add `gulp2g
 with following command:
 
 ```cmd
-npm i --save-dev gulp2go
+npm i --save-dev gulp gulp2go
 ```
 
 or add dependency manually:
@@ -35,11 +35,11 @@ or add dependency manually:
 ## Quick start
 
 ```javascript
-const gulp = require('gulp');
+const {task} = require('gulp');
 const {jsBundler,scssBundler,svgBundler} = require('gulp2go');
 /** bundle with browserify **/
-gulp.task('javascript',()=>{
-    return jsBundler('path/to/build.js','bundlefile.js','path/to/js/dist',{
+task('javascript',()=>
+    jsBundler('path/to/build.js','bundlefile.js','path/to/js/dist',{
         /** optional **/
         babelify:{
             extensions:['.tsx','.ts']
@@ -52,16 +52,16 @@ gulp.task('javascript',()=>{
         tsify:{
             target:'es6'
         }
-    });
-});
+    })
+);
 /** bundle with sass **/
-gulp.task('styles',()=>{
-    return scssBundler('path/to/*.scss','path/to/scss/dist')
-});
+task('styles',()=>
+    scssBundler('path/to/*.scss','path/to/scss/dist')
+);
 /** make svg icon sprite **/
-gulp.task('sprites',()=>{
-    return scssBundler('path/to/*.svg','sprite.svg','path/to/svg/dist');
-});
+task('sprites',()=>
+    scssBundler('path/to/*.svg','sprite.svg','path/to/svg/dist')
+);
 ```
 
 ## License
