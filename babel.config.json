@@ -3,5 +3,5 @@
     "@babel/plugin-transform-modules-commonjs"
   ],
   "presets": [],
-  "retainLines": true
+  "retainLines": false
 }

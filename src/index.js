@@ -17,7 +17,6 @@ import sassLib from 'sass'
 import gulpSass from 'gulp-sass'
 import { makeRequireTransform} from 'browserify-transform-tools'
 
-
 const sass = gulpSass(sassLib)
 
 const extend = (...sources) => Object.assign({}, ...sources);
@@ -44,7 +43,7 @@ const schemify = makeRequireTransform('schemify', {
  * @param target
  * @return {*}
  */
-const svgBundler = (files, bundle, target) => {
+export const svgBundler = (files, bundle, target) => {
     return src(files)
         .pipe(svgSprite({
             mode: {stack: {sprite: bundle}}
@@ -66,7 +65,7 @@ const svgBundler = (files, bundle, target) => {
  * @param settings
  * @return {*}
  */
-const scssBundler = (files, target, settings = {}) => {
+export const scssBundler = (files, target, settings = {}) => {
     let chain = gulp.src(files);
     chain = chain.pipe(sourcemaps.init({}));
     chain = chain.pipe(sass().on('error', sass.logError));
@@ -106,7 +105,7 @@ const babelifyDefaults = {
  * @param settings
  * @return {*}
  */
-const jsBundler = (source, bundle, target, settings = {}) => {
+export const jsBundler = (source, bundle, target, settings = {}) => {
     const plugins = [];
     const transform = [];
     const params = {
@@ -147,8 +146,8 @@ export {
     gulp,
     through2,
     sourcemaps,
-    del,
     sass,
+    del,
     browserify,
     vinylSource,
     vinylBuffer,
@@ -157,10 +156,6 @@ export {
     rename,
     touch,
     purify,
-    concat,
-    jsBundler,
-    scssBundler,
-    svgBundler
+    concat
 }
-
 
