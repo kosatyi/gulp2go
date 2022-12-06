@@ -11,8 +11,8 @@
     "url": "git://github.com/kosatyi/gulp2go.git"
   },
   "scripts": {
-    "build": "npm i && babel src/index.js --out-file dist/index.js --plugins @babel/plugin-transform-modules-commonjs",
-    "start": "npm i && babel --watch src/index.js --out-file dist/index.js --plugins @babel/plugin-transform-modules-commonjs",
+    "build": "npm i && babel src/index.js --out-file dist/index.js",
+    "start": "npm i && babel --watch src/index.js --out-file dist/index.js",
     "version": "npm run build",
     "postversion": "git push && git push --tags"
   },

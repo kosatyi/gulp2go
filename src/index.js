@@ -13,8 +13,13 @@ import vinylSource from 'vinyl-source-stream'
 import vinylBuffer from 'vinyl-buffer'
 import purify from 'gulp-purify-css'
 import concat from 'gulp-concat'
-import sass from 'gulp-sass'
+import sassLib from 'sass'
+import gulpSass from 'gulp-sass'
 import { makeRequireTransform} from 'browserify-transform-tools'
+
+
+const sass = gulpSass(sassLib)
+
 const extend = (...sources) => Object.assign({}, ...sources);
 
 const wrapper = p => `(typeof window !== "undefined" ? window['${p}'] : typeof global !== "undefined" ? global['${p}'] : null)`;
