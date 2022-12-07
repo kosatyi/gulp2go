@@ -44,7 +44,7 @@ const schemify = makeRequireTransform('schemify', {
  * @return {*}
  */
 export const svgBundler = (files, bundle, target) => {
-    return src(files)
+    return gulp.src(files)
         .pipe(svgSprite({
             mode: {stack: {sprite: bundle}}
         }))
