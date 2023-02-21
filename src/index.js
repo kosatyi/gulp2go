@@ -17,6 +17,8 @@ import sassLib from 'sass'
 import gulpSass from 'gulp-sass'
 import { makeRequireTransform} from 'browserify-transform-tools'
 
+import svgFunction from 'node-sass-svg';
+
 const sass = gulpSass(sassLib)
 
 const extend = (...sources) => Object.assign({}, ...sources);
@@ -56,6 +58,14 @@ export const svgBundler = (files, bundle, target) => {
         .pipe(touch());
 };
 
+const sassOptions = (options = {}) => {
+    const result =  {
+        functions:{}
+    }
+    extend(result.functions,svgFunction(),options.functions || {})
+    return options
+}
+
 
 /**
  *
@@ -67,7 +77,7 @@ export const svgBundler = (files, bundle, target) => {
 export const scssBundler = (files, target, settings = {}) => {
     let chain = gulp.src(files);
     chain = chain.pipe(sourcemaps.init({}));
-    chain = chain.pipe(sass(settings['sass'],false).on('error', sass.logError));
+    chain = chain.pipe(sass(settings['sass'] || {},false).on('error', sass.logError));
     if ('purify' in settings) {
         chain = chain.pipe(purify(settings['purify']));
     }
