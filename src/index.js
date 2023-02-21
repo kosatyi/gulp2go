@@ -49,7 +49,6 @@ export const svgBundler = (files, bundle, target) => {
             mode: {stack: {sprite: bundle}}
         }))
         .on('error', function (err) {
-            console.log(err);
             this.emit('end');
         })
         .pipe(rename(bundle))
@@ -68,7 +67,7 @@ export const svgBundler = (files, bundle, target) => {
 export const scssBundler = (files, target, settings = {}) => {
     let chain = gulp.src(files);
     chain = chain.pipe(sourcemaps.init({}));
-    chain = chain.pipe(sass().on('error', sass.logError));
+    chain = chain.pipe(sass(settings['sass'],false).on('error', sass.logError));
     if ('purify' in settings) {
         chain = chain.pipe(purify(settings['purify']));
     }

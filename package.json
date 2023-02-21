@@ -23,6 +23,7 @@
     "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/plugin-transform-typescript": "^7.14.6",
     "@babel/preset-env": "^7.14.1",
+    "@types/gulp": "^4.0.10",
     "autoprefixer": "10.4.13",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
