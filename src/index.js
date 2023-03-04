@@ -1,8 +1,11 @@
 import gulp from 'gulp'
 import sourcemaps from 'gulp-sourcemaps'
 import through2 from 'through2'
+import terser from 'gulp-terser'
+
 import del from 'del'
 import uglify from 'gulp-uglify'
+
 import rename from 'gulp-rename'
 import autoprefixer from 'gulp-autoprefixer'
 import svgSprite from 'gulp-svg-sprite'
@@ -15,8 +18,7 @@ import purify from 'gulp-purify-css'
 import concat from 'gulp-concat'
 import sassLib from 'sass'
 import gulpSass from 'gulp-sass'
-import { makeRequireTransform} from 'browserify-transform-tools'
-
+import { makeRequireTransform } from 'browserify-transform-tools'
 import svgFunction from 'node-sass-svg';
 
 const sass = gulpSass(sassLib)
@@ -45,7 +47,7 @@ const schemify = makeRequireTransform('schemify', {
  * @param target
  * @return {*}
  */
-export const svgBundler = (files, bundle, target) => {
+export function svgBundler(files, bundle, target){
     return gulp.src(files)
         .pipe(svgSprite({
             mode: {stack: {sprite: bundle}}
@@ -74,7 +76,7 @@ const sassOptions = (options = {}) => {
  * @param settings
  * @return {*}
  */
-export const scssBundler = (files, target, settings = {}) => {
+export function scssBundler(files, target, settings = {}) {
     let chain = gulp.src(files);
     chain = chain.pipe(sourcemaps.init({}));
     chain = chain.pipe(sass(settings['sass'] || {},false).on('error', sass.logError));
@@ -88,19 +90,10 @@ export const scssBundler = (files, target, settings = {}) => {
         .pipe(sourcemaps.write('./', {}))
         .pipe(gulp.dest(target))
         .pipe(touch());
-};
-
-exports.scssBundler = scssBundler;
+}
 
 const babelifyDefaults = {
-    plugins: [
-        ["@babel/plugin-transform-typescript", {
-            "allExtensions": true,
-            "allowDeclareFields": true
-        }],
-        ["@babel/plugin-proposal-class-properties"],
-        ["@babel/plugin-transform-runtime"]
-    ],
+    plugins: [],
     presets: [
         ["@babel/preset-env", {}]
     ],
@@ -114,7 +107,7 @@ const babelifyDefaults = {
  * @param settings
  * @return {*}
  */
-export const jsBundler = (source, bundle, target, settings = {}) => {
+export function jsBundler(source, bundle, target, settings = {}){
     const plugins = [];
     const transform = [];
     const params = {
@@ -141,7 +134,7 @@ export const jsBundler = (source, bundle, target, settings = {}) => {
         .pipe(vinylBuffer())
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(gulp.dest(target))
-        .pipe(uglify())
+        .pipe(terser())
         .pipe(rename({
             extname: '.min.js'
         }))
