@@ -23,6 +23,7 @@ import svgFunction from 'node-sass-svg';
 
 const sass = gulpSass(sassLib)
 
+
 const extend = (...sources) => Object.assign({}, ...sources);
 
 const wrapper = p => `(typeof window !== "undefined" ? window['${p}'] : typeof global !== "undefined" ? global['${p}'] : null)`;
